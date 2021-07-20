@@ -9,7 +9,7 @@ Node.js application that utilizes Object Oriented Programming and Inquirer to pr
 *_Inquirer_
 
 ## Link to video walk through
-
+https://youtu.be/UXQbFQ4c6xk
 
 ## Future Development
 I would like to expand my styling skills on this application and integrate more bootstrap and CSS frameworks. 
