@@ -5,17 +5,9 @@ const Intern = require('./lib/Intern')
 
 const path = require('path');
 const fs = require('fs');
+const generatePage = require('./src/template')
 
-var team = [];
-
-
-// Make class and check them into team array for each person Intern engineer!!! lines 31
-
-// once they R done asking questions time to build fake html string (use backticks)!!! same way we made fake ready me
-
-// once fake htmlString is good to go do your fs.writeFIle
-
-
+let team = [];
 
 const promptUser = () => {
         inquirer.prompt([
@@ -58,6 +50,8 @@ const addEmployee = () => {
             employeeType()
         } else {
             console.log('Your profile is finished!', team)
+
+            makePage()
         }
     })
   
@@ -71,8 +65,8 @@ const employeeType = () => {
             message: 'Would you like to add an Engineer or Inter?',
             choices: ['Engineer', 'Intern']
         }
-    ]).then(function(typeAnswer) {
-        if(typeAnswer.chooseEmployeeType === 'Intern') {
+    ]).then(employeeData => {
+        if(employeeData.chooseEmployeeType === 'Intern') {
             internPrompt()
         } else {
             engineerPrompt()
@@ -128,6 +122,19 @@ const engineerPrompt = () => {
     })
 }
   
+const makePage = () => {
+    const pageHTML = generatePage(team);
+
+    console.log('HTML Data', pageHTML)
+    fs.writeFile('./dist/index.html', pageHTML, err => {
+        if (err) throw new Error('error rendering page', err);
+
+        console.log('Page created! Check out index.html!')
+    })
+
+}
+
 
 promptUser()
+
     
